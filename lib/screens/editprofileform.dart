@@ -284,6 +284,18 @@ class _EditprofileformState extends State<Editprofileform> {
                           CustomButton(
                             text: "Update",
                             onPressed: () {
+                              if (widget.formnum == 3 &&
+                                  bioController.text.trim().isEmpty) {
+                                showGlobalSnackBar(
+                                    message: "Bio cannot be empty");
+                                return;
+                              }
+                              if (widget.formnum == 6 &&
+                                  currentcityController.text.trim().isEmpty) {
+                                showGlobalSnackBar(
+                                    message: "Current city cannot be empty");
+                                return;
+                              }
                               context.read<ProfileupdateBloc>().add(
                                 SubmitProfileUpdateevent(
                                   formnum: widget.formnum,
@@ -292,11 +304,10 @@ class _EditprofileformState extends State<Editprofileform> {
                                   bio: bioController.text,
                                   phoneNo: mobileController.text,
                                   email: emailController.text,
-                                  gender: gender.toString(),
+                                  gender: gender ?? '',
                                   dateOfBirth: birthdayController.text,
                                   language: languageController.text,
-                                  placesLived:
-                                      currentcityController.text.toString(),
+                                  placesLived: currentcityController.text,
                                 ),
                               );
                             },

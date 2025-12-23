@@ -383,6 +383,8 @@ class _LikecommentshareState extends State<Likecommentshare> {
                                     child: TextField(
                                       controller: commentController,
                                       focusNode: focusNode,
+                                      textCapitalization:
+                                          TextCapitalization.sentences,
                                       keyboardType: TextInputType.multiline,
                                       decoration: InputDecoration(
                                         hintText: "Write a comment...",

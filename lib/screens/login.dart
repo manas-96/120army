@@ -231,7 +231,8 @@ class _LoginState extends State<Login>
                                   } else if (state is LoginLoaded) {
                                     if (state.model.status == "failed") {
                                       showGlobalSnackBar(
-                                        message: state.model.msg.toString(),
+                                        message:
+                                            "Invalid credentials. Please try again.",
                                       );
                                     } else {
                                       if (state.model.data!.isVerified == 1) {
@@ -338,9 +339,20 @@ class _LoginState extends State<Login>
                                           );
                                           return;
                                         }
+
+                                        String usernameInput =
+                                            emailController.text.trim();
+                                        bool isPhoneNumber =
+                                            RegExp(r'^\d').hasMatch(usernameInput);
+
+                                        if (!isPhoneNumber) {
+                                          usernameInput =
+                                              usernameInput.toLowerCase();
+                                        }
+
                                         context.read<LoginBloc>().add(
                                           LoginEventTrigger(
-                                            username: emailController.text,
+                                            username: usernameInput,
                                             password: passwordController.text,
                                             device_token: token!,
                                           ),

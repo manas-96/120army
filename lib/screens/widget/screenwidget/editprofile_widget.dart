@@ -82,7 +82,15 @@ class _EditprofilewidgetState extends State<Editprofilewidget> {
         UpdateCoverPicEvent(value.data.coverImage),
       );
 
-      showGlobalSnackBar(message: value.msg);
+      if (image.isEmpty) {
+        if (formnum == 1) {
+          showGlobalSnackBar(message: "Cover picture removed");
+        } else {
+          showGlobalSnackBar(message: "Profile picture removed");
+        }
+      } else {
+        showGlobalSnackBar(message: value.msg);
+      }
       context.read<ProfileBloc>().add(ProfileLoadedEventnonload());
     });
   }
@@ -417,7 +425,11 @@ class _EditprofilewidgetState extends State<Editprofilewidget> {
                       Row(
                         spacing: 10,
                         children: [
-                          Circleicon(icon: false),
+                              Circleicon(
+                                icon: false,
+                                text:
+                                    "${finalData.firstName.isNotEmpty ? finalData.firstName[0] : ''}${finalData.lastName.isNotEmpty ? finalData.lastName[0] : ''}",
+                              ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -439,7 +451,11 @@ class _EditprofilewidgetState extends State<Editprofilewidget> {
                       Row(
                         spacing: 10,
                         children: [
-                          Circleicon(icon: false),
+                          Circleicon(
+                            icon: false,
+                            text:
+                                "${finalData.firstName.isNotEmpty ? finalData.firstName[0] : ''}${finalData.lastName.isNotEmpty ? finalData.lastName[0] : ''}",
+                          ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -512,7 +528,10 @@ class _EditprofilewidgetState extends State<Editprofilewidget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    finalData.gender,
+                                    finalData.gender.isNotEmpty
+                                        ? finalData.gender[0].toUpperCase() +
+                                            finalData.gender.substring(1)
+                                        : '',
                                     style: TextStyle(fontSize: paraFont),
                                   ),
                                   Text(
@@ -761,7 +780,9 @@ class _EditprofilewidgetState extends State<Editprofilewidget> {
 class Circleicon extends StatelessWidget {
   final bool icon;
   final String iconpath;
-  const Circleicon({super.key, this.icon = true, this.iconpath = ""});
+  final String text;
+  const Circleicon(
+      {super.key, this.icon = true, this.iconpath = "", this.text = "Aa"});
 
   @override
   Widget build(BuildContext context) {
@@ -782,7 +803,7 @@ class Circleicon extends StatelessWidget {
                   colorFilter: ColorFilter.mode(kPrimaryColor, BlendMode.srcIn),
                 )
                 : Text(
-                  "Aa",
+                  text,
                   style: TextStyle(
                     fontSize: paraFont,
                     fontWeight: FontWeight.w700,
