@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "644069241628",
+    "project_id": "army-9cd13",
+    "storage_bucket": "army-9cd13.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644069241628:android:f9e7a587dcba91920980d9",
+        "android_client_info": {
+          "package_name": "com.onetwentyarmyprayer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkVN7CPpyJHLiTiqGIeCo5z_aV6KzlBv8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,8 @@
+# Flutter local notifications
+-keep class com.dexterous.** { *; }
+-dontwarn org.slf4j.**
+
+# Keep notification icon & sound resources
+-keepclassmembers class * {
+    public <init>(...);
+}
