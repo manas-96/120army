@@ -140,26 +140,35 @@ class _SignupconfirmationcodeContentState
                   BlocListener<ConfirmationcodeBloc, ConfirmationcodeState>(
                     listener: (context, state) {
                       if (state is ConfirmationcodeLoaded) {
-                        showGlobalSnackBar(message: state.model.msg.toString());
+                        showGlobalSnackBar(
+                          message: "OTP has been sent to your registered email.",
+                        );
                       } else if (state is ConfirmationcodeError) {
                         showGlobalSnackBar(message: state.error.toString());
                       }
                     },
                     child: SizedBox.shrink(),
                   ),
-
                   BlocListener<OtpverifyBloc, OtpverifyState>(
                     listener: (context, state) {
                       if (state is OtpverifyLoaded) {
-                        showGlobalSnackBar(message: state.model.msg.toString());
-                        if (state.model.status != "failed") {
+                        if (state.model.status == "failed") {
+                          showGlobalSnackBar(
+                            message: "Invalid OTP. Please try again.",
+                          );
+                        } else {
+                          showGlobalSnackBar(
+                            message: "OTP has been verified.",
+                          );
                           Navigator.of(context).pushNamed(
                             "/login",
                             arguments: {"animationEnabled": false},
                           );
                         }
                       } else if (state is OtpverifyError) {
-                        showGlobalSnackBar(message: state.error.toString());
+                        showGlobalSnackBar(
+                          message: "Invalid OTP. Please try again.",
+                        );
                       }
                     },
                     child: SizedBox.shrink(),
